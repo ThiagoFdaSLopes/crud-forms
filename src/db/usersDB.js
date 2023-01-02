@@ -6,7 +6,7 @@ const insert = (people) => conn.execute(
 );
 
 const getUsers = () => conn.execute(
-  'SELECT * FROM users',
+  'SELECT * FROM crudforms.users',
 );
 
 module.exports = {

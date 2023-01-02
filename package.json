@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/ThiagoFdaSLopes/crud-forms#readme",
   "dependencies": {
+    "dotenv": "16.0.3",
     "express": "4.17.1"
   },
   "devDependencies": {

@@ -1,5 +1,5 @@
 const express = require('express');
-const { getUsers, validateEmail, insert, editUser } = require('../db/usersDB');
+const { getUsers, validateEmail, insert, editUser, deleteUser } = require('../db/usersDB');
 const { checkName, checkPassword, checkEmail, checkLastName } = require('../middlewares');
 
 const router = express.Router();
@@ -30,6 +30,18 @@ router.put('/edituser/:id',
   }
 
   res.status(202).json({ message: `Usuario ${id} editado com sucesso` });
+});
+
+router.delete('/deleteUser/:id', async (req, res) => {
+  const { id } = req.params;
+
+  const [result] = await deleteUser(id);
+
+  if (result.affectedRows === 0) {
+    return res.status(400).json({ message: 'Usuario nao encontado' });
+  }
+
+  res.status(200).json({ message: `Usuario ${id} deletado com sucesso` });
 });
 
 router.get('/users', async (req, res) => {

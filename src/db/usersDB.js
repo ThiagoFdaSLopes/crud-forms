@@ -20,9 +20,15 @@ const getUsers = () => conn.execute(
   'SELECT * FROM crudforms.users',
 );
 
+const deleteUser = (id) => conn.execute(
+  'DELETE FROM crudforms.users WHERE id = ?',
+  [id],
+);
+
 module.exports = {
   getUsers,
   insert,
   validateEmail,
   editUser,
+  deleteUser,
 };

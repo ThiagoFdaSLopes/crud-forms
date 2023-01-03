@@ -5,6 +5,11 @@ const insert = (people) => conn.execute(
   [people.firstName, people.lastName, people.password, people.email],
 );
 
+const validateEmail = (email) => conn.execute(
+  'SELECT email FROM crudforms.users WHERE email = ?',
+  [email],
+);
+
 const getUsers = () => conn.execute(
   'SELECT * FROM crudforms.users',
 );
@@ -12,4 +17,5 @@ const getUsers = () => conn.execute(
 module.exports = {
   getUsers,
   insert,
+  validateEmail,
 };

@@ -1,10 +1,12 @@
 const checkEmail = (req, res, next) => {
-  const { password } = req.body;
+  const { email } = req.body;
 
-  if (!password) return res.status(400).json({ message: 'O password precisa ser informado' });
-  if (password.length < 9) { 
+  const regexEmail = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
+
+  if (!email) return res.status(400).json({ message: 'O email precisa ser informado' });
+  if (!regexEmail.test(email)) { 
     return res.status(400).json(
-      { message: 'O password precisa ter mais de 8 caracteres informado' },
+      { message: 'O email precisa ser formato correto @provedor.com.br ou @provedor.com' },
     ); 
   }
 

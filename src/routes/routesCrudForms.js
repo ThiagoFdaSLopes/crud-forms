@@ -1,5 +1,6 @@
 const express = require('express');
-const { getUsers, validateEmail, insert, editUser, deleteUser } = require('../db/usersDB');
+const {
+  getUsers, validateEmail, insert, editUser, deleteUser, checkedUser } = require('../db/usersDB');
 const { checkName, checkPassword, checkEmail, checkLastName } = require('../middlewares');
 
 const router = express.Router();
@@ -42,6 +43,15 @@ router.delete('/deleteUser/:id', async (req, res) => {
   }
 
   res.status(200).json({ message: `Usuario ${id} deletado com sucesso` });
+});
+
+router.get('/login', checkEmail, checkPassword, async (req, res) => {
+  const [result] = await checkedUser(req.body);
+
+  if (result.length === 0) {
+    return res.status(400).json({ message: 'Usuario nao encontrado' });
+  }
+  res.status(200).json(result);
 });
 
 router.get('/users', async (req, res) => {

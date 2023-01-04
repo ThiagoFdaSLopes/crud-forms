@@ -16,6 +16,12 @@ const validateEmail = (email) => conn.execute(
   [email],
 );
 
+const checkedUser = (body) => conn.execute(
+  'SELECT * FROM crudforms.users WHERE email = ? AND user_password = ?',
+  [body.email, body.password],
+
+);
+
 const getUsers = () => conn.execute(
   'SELECT * FROM crudforms.users',
 );
@@ -31,4 +37,5 @@ module.exports = {
   validateEmail,
   editUser,
   deleteUser,
+  checkedUser,
 };
